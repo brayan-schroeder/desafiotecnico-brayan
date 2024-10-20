@@ -1,4 +1,5 @@
 package com.desafiotecnico.brayan.filme;
+
 import jakarta.persistence.*;
 
 @Entity

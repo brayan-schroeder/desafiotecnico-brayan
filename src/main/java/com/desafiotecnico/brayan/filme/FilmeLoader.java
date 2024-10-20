@@ -12,10 +12,10 @@ import java.io.FileReader;
 @Component
 public class FilmeLoader implements CommandLineRunner {
 
-    private FilmeRepository filmeRepository;
+    private FilmeService filmeService;
 
-    public FilmeLoader(FilmeRepository filmeRepository) {
-        this.filmeRepository = filmeRepository;
+    public FilmeLoader(FilmeService filmeService) {
+        this.filmeService = filmeService;
     }
 
     @Override
@@ -25,18 +25,17 @@ public class FilmeLoader implements CommandLineRunner {
                 .build()) {
 
             String[] nextLine;
+
             reader.readNext(); // Pula o header
 
             while ((nextLine = reader.readNext()) != null) {
-                Filme filme = new Filme();
-
-                filme.setMovieYear(Integer.parseInt(nextLine[0]));
-                filme.setTitle(nextLine[1]);
-                filme.setStudio(nextLine[2]);
-                filme.setProducer(nextLine[3]);
-                filme.setWinner("yes".equals(nextLine[4]));
-
-                filmeRepository.save(filme);
+                filmeService.saveFilme(
+                        Integer.parseInt(nextLine[0]),
+                        nextLine[1],
+                        nextLine[2],
+                        nextLine[3],
+                        "yes".equals(nextLine[4])
+                );
             }
         }
     }
