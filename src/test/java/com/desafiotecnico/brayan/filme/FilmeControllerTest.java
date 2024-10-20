@@ -24,6 +24,10 @@ public class FilmeControllerTest {
                 .andExpect(jsonPath("$.min[0].producer").exists())
                 .andExpect(jsonPath("$.max[0].producer").exists())
                 .andExpect(jsonPath("$.min[0].interval").exists())
-                .andExpect(jsonPath("$.max[0].interval").exists());
+                .andExpect(jsonPath("$.max[0].interval").exists())
+                .andExpect(jsonPath("$.min[0].previousWin").exists())
+                .andExpect(jsonPath("$.max[0].previousWin").exists())
+                .andExpect(jsonPath("$.min[0].followingWin").exists())
+                .andExpect(jsonPath("$.max[0].followingWin").exists());
     }
 }
