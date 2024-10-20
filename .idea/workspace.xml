@@ -55,7 +55,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources/static" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.FilmeControllerTest.shouldReturnIntervaloPremios">
+  <component name="RunManager" selected="Application.BrayanApplication">
     <configuration name="BrayanApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.desafiotecnico.brayan.BrayanApplication" />
       <module name="brayan" />
