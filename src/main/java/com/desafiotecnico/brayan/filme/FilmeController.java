@@ -1,10 +1,8 @@
 package com.desafiotecnico.brayan.filme;
 
+import com.desafiotecnico.brayan.filme.payload.IntervaloResponse;
 import com.desafiotecnico.brayan.filme.service.FilmeService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("filmes")
@@ -17,7 +15,7 @@ public class FilmeController {
     }
 
     @GetMapping("intervalo_premios")
-    public Map<String, List<Map<String, Object>>> intervaloPremios() {
+    public IntervaloResponse intervaloPremios() {
         return filmeService.getIntervaloPremios();
     }
 }

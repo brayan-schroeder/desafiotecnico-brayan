@@ -3,6 +3,8 @@ package com.desafiotecnico.brayan.filme.service;
 import com.desafiotecnico.brayan.filme.Filme;
 import com.desafiotecnico.brayan.filme.FilmeFactory;
 import com.desafiotecnico.brayan.filme.FilmeRepository;
+import com.desafiotecnico.brayan.filme.payload.IntervaloResponse;
+import com.desafiotecnico.brayan.filme.payload.ProdutorResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -25,7 +27,7 @@ public class FilmeServiceImpl implements FilmeService {
         filmeRepository.save(filme);
     }
 
-    public Map<String, List<Map<String, Object>>> getIntervaloPremios() {
+    public IntervaloResponse getIntervaloPremios() {
         List<Filme> vencedores = filmeRepository.findByWinnerTrue();
 
         Map<String, List<Integer>> anosVencedoresProdutores = new HashMap<>();
@@ -35,8 +37,8 @@ public class FilmeServiceImpl implements FilmeService {
             anosVencedoresProdutores.get(filme.getProducer()).add(filme.getMovieYear());
         }
 
-        List<Map<String, Object>> menoresIntervalos = new ArrayList<>();
-        List<Map<String, Object>> maioresIntervalos = new ArrayList<>();
+        List<ProdutorResponse> menoresIntervalos = new ArrayList<>();
+        List<ProdutorResponse> maioresIntervalos = new ArrayList<>();
 
         int maiorIntervalo = 0;
         int menorInteralo = Integer.MAX_VALUE;
@@ -54,39 +56,23 @@ public class FilmeServiceImpl implements FilmeService {
                         menorInteralo = intervalo;
 
                         menoresIntervalos.clear();
-                        menoresIntervalos.add(createProdutorIntervalo(produtor.getKey(), intervalo, anosVitoriosos.get(i - 1), anosVitoriosos.get(i)));
+                        menoresIntervalos.add(new ProdutorResponse(produtor.getKey(), intervalo, anosVitoriosos.get(i - 1), anosVitoriosos.get(i)));
                     } else if (intervalo == menorInteralo) {
-                        menoresIntervalos.add(createProdutorIntervalo(produtor.getKey(), intervalo, anosVitoriosos.get(i - 1), anosVitoriosos.get(i)));
+                        menoresIntervalos.add(new ProdutorResponse(produtor.getKey(), intervalo, anosVitoriosos.get(i - 1), anosVitoriosos.get(i)));
                     }
 
                     if (intervalo > maiorIntervalo) {
                         maiorIntervalo = intervalo;
 
                         maioresIntervalos.clear();
-                        maioresIntervalos.add(createProdutorIntervalo(produtor.getKey(), intervalo, anosVitoriosos.get(i - 1), anosVitoriosos.get(i)));
+                        maioresIntervalos.add(new ProdutorResponse(produtor.getKey(), intervalo, anosVitoriosos.get(i - 1), anosVitoriosos.get(i)));
                     } else if (intervalo == maiorIntervalo) {
-                        maioresIntervalos.add(createProdutorIntervalo(produtor.getKey(), intervalo, anosVitoriosos.get(i - 1), anosVitoriosos.get(i)));
+                        maioresIntervalos.add(new ProdutorResponse(produtor.getKey(), intervalo, anosVitoriosos.get(i - 1), anosVitoriosos.get(i)));
                     }
                 }
             }
         }
 
-        Map<String, List<Map<String, Object>>> retorno = new HashMap<>();
-
-        retorno.put("min", menoresIntervalos);
-        retorno.put("max", maioresIntervalos);
-
-        return retorno;
-    }
-
-    private Map<String, Object> createProdutorIntervalo(String produtor, int intervalo, int vitoriaAnterior, int vitoriaSeguinte) {
-        Map<String, Object> intervaloRetorno = new HashMap<>();
-
-        intervaloRetorno.put("producer", produtor);
-        intervaloRetorno.put("interval", intervalo);
-        intervaloRetorno.put("previousWin", vitoriaAnterior);
-        intervaloRetorno.put("followingWin", vitoriaSeguinte);
-
-        return intervaloRetorno;
+        return new IntervaloResponse(menoresIntervalos, maioresIntervalos);
     }
 }
