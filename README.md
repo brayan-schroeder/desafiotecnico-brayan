@@ -8,7 +8,7 @@
 ## Como rodar o projeto
 
 - Clonar o repositório
-- Executar 'mvn spring-boot:run' para iniciar a aplicação
+- Executar 'mvn spring-boot:run' para iniciar a aplicação OU rodar através do IntelliJ (usando SDK do Java 17 + Maven na versão igual ou superior à citada acima)
 - A API estará disponível em: GET http://localhost:8080/filmes/intervalo_premios
 
 ## Como rodar os testes
