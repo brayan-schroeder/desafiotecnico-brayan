@@ -2,18 +2,18 @@
 
 ## Requisitos
 
-Java 17
-Maven
+- Java 17
+- Maven
 
 ## Como rodar o projeto
 
-Clonar o repositório
-Executar 'mvn spring-boot:run' para iniciar a aplicação
-A API estará disponível em: GET http://localhost:8080/filmes/intervalo_premios
+- Clonar o repositório
+- Executar 'mvn spring-boot:run' para iniciar a aplicação
+- A API estará disponível em: GET http://localhost:8080/filmes/intervalo_premios
 
 ## Como rodar os testes
 
-Executar 'mvn test'
+- Executar 'mvn test'
 
 ## Endpoints
 
