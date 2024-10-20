@@ -3,7 +3,7 @@
 ## Requisitos
 
 - Java 17
-- Maven
+- Maven 3.6.3 (ou mais recente)
 
 ## Como rodar o projeto
 
