@@ -33,8 +33,14 @@ public class FilmeServiceImpl implements FilmeService {
         Map<String, List<Integer>> anosVencedoresProdutores = new HashMap<>();
 
         for (Filme filme : vencedores) {
-            anosVencedoresProdutores.putIfAbsent(filme.getProducer(), new ArrayList<>());
-            anosVencedoresProdutores.get(filme.getProducer()).add(filme.getMovieYear());
+            String campoProdutor = filme.getProducer().replace(" and ", ",");
+
+            for (String produtor : campoProdutor.split(",")) {
+                String produtorClean = produtor.replace(",", "").trim();
+
+                anosVencedoresProdutores.putIfAbsent(produtorClean, new ArrayList<>());
+                anosVencedoresProdutores.get(produtorClean).add(filme.getMovieYear());
+            }
         }
 
         List<ProdutorResponse> menoresIntervalos = new ArrayList<>();
